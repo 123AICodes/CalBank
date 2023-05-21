@@ -1,0 +1,2193 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  font-family: Poppins;
+}
+:root {
+  --gray: hsl(0, 4%, 50%);
+  --white: hsl(0, 0%, 100%);
+  --white-alt: hsl(0, 0%, 97%);
+  --primary: hsl(50, 97%, 51%);
+  --primary-alt: hsl(37, 93%, 53%);
+  --secondary: hsl(240, 30%, 9%);
+  --secondary-alt: hsl(240, 30%, 14%);
+  --background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.24),
+    rgba(0, 0, 0, 0.45)
+  );
+
+  --btn-border-radius: 0.4em;
+
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+  --fw-800: 800;
+}
+/* =======================================================================
+||	GLOBAL CLASSES
+**======================================================================== */
+html,
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-size: 0.9em;
+  color: var(--gray);
+  background: var(--white-alt);
+}
+.main-site {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+a,
+button {
+  color: inherit;
+  cursor: pointer;
+  background: inherit;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+}
+section {
+  padding: 7em 5%;
+}
+.flexitem {
+  display: flex;
+}
+.flexcenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flexcol {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.flexbetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.grid-3fr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-2fr {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.container {
+  width: 100%;
+}
+.primary-filled-button {
+  display: inline-block;
+  position: relative;
+  margin-top: 1em;
+  padding: 1em 2em;
+  overflow: hidden;
+  color: var(--secondary-alt);
+  transition: 0.25s;
+  letter-spacing: 1px;
+  z-index: 2;
+  text-align: center;
+  border: 1px dotted var(--primary-alt);
+}
+.primary-filled-button:hover {
+  color: var(--white);
+}
+.primary-filled-button::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 180%;
+  border-radius: 0 0 50% 50%;
+  background: var(--primary-alt);
+  z-index: -1;
+  transition: 0.6s;
+}
+.primary-filled-button:hover::before {
+  height: 0;
+}
+.primary-border-button {
+  display: inline-block;
+  position: relative;
+  margin-top: 1em;
+  padding: 1em 2em;
+  font-size: 1em;
+  width: 100%;
+  color: var(--secondary-alt);
+  font-weight: var(--fw-500);
+  z-index: 2;
+  overflow: hidden;
+  border: 1px dotted var(--primary-alt);
+  transition: 0.25s;
+  letter-spacing: 1px;
+  width: max-content;
+  /* display: flex;
+  align-items: center; */
+  gap: 0.5em;
+  text-align: center;
+}
+.primary-border-button:hover {
+  color: var(--white);
+  gap: 1em;
+}
+.primary-border-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background: var(--primary-alt);
+  z-index: -1;
+  border-radius: 50% 50% 0 0;
+  transition: 0.8s;
+}
+.primary-border-button:hover::before {
+  height: 180%;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+.gotop,
+.abouttop {
+  position: fixed;
+  right: 4%;
+  bottom: 6%;
+  width: 3em;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  background: hsl(240, 30%, 17%);
+  font-size: 1em;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+  transition: 0.25s;
+  border: 2px solid transparent;
+  display: none;
+  color: var(--white);
+}
+.abouttop {
+  display: flex;
+}
+.gotop:hover,
+.abouttop:hover {
+  background: #333;
+  border-color: hsl(0, 0%, 2%);
+}
+@keyframes topAnim {
+  from {
+    transform: translateY(5em);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.gotop.active,
+.abouttop.active {
+  display: flex;
+  animation: topAnim 0.2s;
+}
+
+/* =======================================================================
+||	TOPBAR CONTAINER
+**======================================================================== */
+.topbar-container {
+  position: relative;
+  padding: 0.3em 25em;
+  background: linear-gradient(
+    to right,
+    hsl(240, 29%, 14%, 0.9),
+    hsl(240, 30%, 9%)
+  );
+  height: 8vh;
+  overflow: hidden;
+}
+.topbar-container .swiper-button-next:after,
+.topbar-container .swiper-button-prev:after {
+  font-size: 1em;
+  color: var(--white-alt);
+}
+
+.topbar-container .text-slider {
+  overflow: hidden;
+}
+.topbar-container .box {
+  align-items: center;
+  width: 100%;
+}
+.topbar-icon {
+  width: 2.5em;
+  aspect-ratio: 1/1;
+  color: var(--white);
+  background: var(--primary-alt);
+  margin-left: 1em;
+}
+.topbar-container .content {
+  font-size: 1em;
+  color: var(--white-alt);
+  font-weight: var(--fw-600);
+  margin: 0 1em;
+}
+.topbar.small-screen {
+  padding: 0.5em 5em;
+  background: linear-gradient(
+    to right,
+    hsl(240, 29%, 14%, 0.9),
+    hsl(240, 30%, 9%)
+  );
+  display: none;
+}
+.topbar.small-screen .wrapper {
+  gap: 0.5em;
+}
+.topbar.small-screen .content {
+  padding-right: 0.4em;
+  color: #eee;
+  border-right: 1px solid #eee;
+}
+.topbar.small-screen .content:hover {
+  color: var(--primary);
+}
+/* =======================================================================
+||	HEADER CONTAINER
+**======================================================================== */
+.header-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 0.8em 4%;
+  background: var(--white);
+  z-index: 2099;
+  border-bottom: 1px solid #eee;
+}
+@keyframes headerAnim {
+  from {
+    transform: translateY(-10em);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.header-container.scrollFix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: 0.5s;
+  padding: 0.6em 4%;
+  animation: headerAnim 0.5s;
+}
+.logo {
+  width: 180px;
+  overflow: hidden;
+}
+.navbar {
+  position: relative;
+}
+.nav-item,
+.nav-link {
+  position: relative;
+}
+.nav-item {
+  margin: 0 0.5em;
+}
+.nav-link {
+  font-size: 1em;
+  font-weight: var(--fw-500);
+  display: flex;
+  align-items: center;
+}
+.nav-link.active,
+.nav-link:hover {
+  color: var(--primary);
+}
+.nav-link span {
+  font-size: 0.8em;
+  transform: translate(195deg);
+}
+.close-mega-btn {
+  display: inline-block;
+  position: relative;
+  top: -2em;
+  margin-top: -2em;
+  width: 20%;
+  border: 1px dotted var(--secondary-alt);
+  padding: 0.5em;
+  color: var(--secondary-alt);
+}
+.close-mega-btn:hover {
+  border-color: var(--primary);
+}
+.nav-item:hover ~ .mega-dropdown {
+  display: block;
+}
+.mega-dropdown {
+  position: absolute;
+  top: calc(100% + 2em);
+  width: 100vw;
+  background: var(--white);
+  border-top: 1px solid var(--white-alt);
+  display: none;
+  z-index: 10;
+  transition: 0.5s;
+}
+@keyframes megaAnim {
+  from {
+    transform: translateY(-2em);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mega-dropdown.appear {
+  display: block;
+  animation: megaAnim 0.5s;
+}
+.mega-dropdown.all-products {
+  padding: 3em 6em;
+  left: -29em;
+}
+.mega-dropdown.all-products.none {
+  display: none;
+}
+.mega-dropdown.about-us {
+  left: -62.5em;
+  background: var(--primary);
+  padding: 3em 6em;
+}
+.header-container.scrollFix .mega-dropdown.all-products {
+  left: -29.2em;
+}
+.header-container.scrollFix .mega-dropdown.about-us {
+  left: -62.5em;
+}
+.mega-dropdown.about-us h3 {
+  padding: 0.8em 0;
+  font-size: 2em;
+  font-weight: var(--fw-500);
+  color: var(--white);
+}
+.mega-dropdown.all-products .wrapper {
+  display: flex;
+  gap: 2em;
+  height: max-content;
+}
+.mega-dropdown.about-us .wrapper .box ul li {
+  padding: 0.5em 0;
+}
+.mega-dropdown.about-us .wrapper .box ul li a {
+  transition: 0.15s;
+}
+.mega-dropdown.about-us .wrapper .box ul li a:hover {
+  color: #eee;
+  letter-spacing: 1px;
+}
+.all-products-btn {
+  display: inline-block;
+  position: relative;
+  padding: 1.5em 2em;
+  font-size: 1em;
+  width: 100%;
+  color: var(--secondary-alt);
+  font-weight: var(--fw-500);
+  text-transform: uppercase;
+  z-index: 2;
+  overflow: hidden;
+  border: 1px dotted var(--primary-alt);
+  transition: 0.25s;
+  letter-spacing: 1px;
+}
+.all-products-btn.active,
+.all-products-btn:hover {
+  color: var(--white);
+}
+.all-products-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background: var(--primary-alt);
+  z-index: -1;
+  border-radius: 50% 50% 0 0;
+  transition: 0.8s;
+}
+.all-products-btn.active::before,
+.all-products-btn:hover::before {
+  height: 180%;
+}
+.mega-dropdown.all-products .wrapper > .left {
+  flex-basis: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+.mega-dropdown.all-products .wrapper .right {
+  position: relative;
+  overflow: hidden;
+  flex-basis: 78%;
+}
+.personal-banking-img {
+  height: 300px;
+  width: 90%;
+  background: url("../assets/personal-banking-megamenu.png") no-repeat center
+    center/cover;
+  object-fit: cover;
+}
+.business-banking-img {
+  height: 300px;
+  width: 90%;
+  background: url("../assets/business-banking-megamenu.png") no-repeat center
+    center/cover;
+  object-fit: cover;
+}
+@keyframes boxesAnim {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mega-dropdown.all-products .wrapper .right .box {
+  overflow: hidden;
+  display: none;
+  transition: all 0.5s;
+}
+.mega-dropdown.all-products .wrapper .right .box.active {
+  display: block;
+  animation: boxesAnim 0.5s;
+}
+.mega-dropdown.all-products .wrapper .right .box.corperate-banking .container {
+  display: flex;
+  gap: 1em;
+}
+.mega-dropdown.all-products
+  .wrapper
+  .right
+  .box.corperate-banking
+  .primary-border-button {
+  width: max-content;
+}
+.mega-dropdown.all-products .wrapper .right .box.corperate-banking .box {
+  transition: 0.5s;
+}
+@keyframes boxesAnim1 {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mega-dropdown.all-products .wrapper .right .box.corperate-banking .box.show {
+  display: grid;
+  animation: boxesAnim1 0.5s;
+}
+.mega-dropdown.all-products
+  .wrapper
+  .right
+  .box.corperate-banking
+  .box.overview
+  .content
+  p {
+  line-height: 1.8;
+}
+.mega-dropdown.all-products
+  .wrapper
+  .right
+  .box.corperate-banking
+  .box.overview {
+  flex-basis: 68%;
+}
+.overview-img-wrapper {
+  height: 250px;
+  width: 90%;
+  background: url("../assets/insetscorporate-banking-account-solutions.png")
+    no-repeat center center/cover;
+  object-fit: cover;
+}
+.mega-dropdown.all-products .wrapper .right .box.account-sol,
+.mega-dropdown.all-products .wrapper .right .box.convinient {
+  width: 100%;
+}
+.account-sol-img-wrapper {
+  height: 250px;
+  width: 90%;
+  background: url("../assets/convenient-banking-megamenu.png") no-repeat center
+    center/cover;
+  object-fit: cover;
+}
+.convinient-img-wrapper {
+  height: 250px;
+  width: 90%;
+  background: url("../assets/convenient-banking-megamenu.png") no-repeat center
+    center/cover;
+  object-fit: cover;
+}
+.corperate-banking-buttons-wrapper {
+  flex-basis: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.corperate-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  font-weight: var(--fw-500);
+  color: var(--secondary);
+  padding: 1em;
+  border: 1px dotted transparent;
+}
+.corperate-btn.active,
+.corperate-btn:hover {
+  color: var(--primary-alt);
+  border-color: var(--gray);
+}
+.mega-dropdown.all-products .wrapper .right .grid-3fr {
+  gap: 0.5em;
+}
+.heading {
+  color: var(--secondary-alt);
+  font-size: 1.3em;
+  font-weight: var(--fw-500);
+  margin-bottom: 0.5em;
+}
+.mega-dropdown.all-products .wrapper .right .wrap-content {
+  gap: 1em;
+}
+.mega-dropdown.all-products .wrapper .right .wrap-content .content {
+  margin: 0 1em;
+}
+.mega-dropdown.all-products .wrapper .right .content ul li {
+  padding: 0.8em 0;
+}
+.mega-dropdown.all-products .wrapper .right .content ul li a:hover {
+  color: var(--primary-alt);
+}
+header .right li {
+  position: relative;
+}
+header .right li a {
+  width: 100%;
+  height: 100%;
+}
+header .right li.on-item {
+  display: inline-block;
+  /* left: -2em; */
+  border: 1px dotted var(--primary-alt);
+  padding: 1em 2.5em;
+  color: var(--white);
+  z-index: 2;
+}
+header .right li.on-item:hover {
+  color: var(--secondary-alt);
+}
+header .right li.on-item:hover::before {
+  height: 0;
+}
+header .right li.on-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-alt);
+  z-index: -1;
+  transition: 0.5s;
+}
+header .right .on-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% + 2.5em);
+  background: var(--white);
+  z-index: 2099;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  transition: 0.25s;
+  border-bottom: 2px solid var(--primary-alt);
+}
+header .right ul li:hover ul {
+  display: block;
+  animation: megaAnim 0.5s;
+}
+header .right .primary-border-button {
+  margin-top: 0;
+  width: 100%;
+  font-size: 0.85em;
+  padding: 1.5em 2em;
+}
+.humberger {
+  position: relative;
+  padding: 1em 1.5em;
+  border: 1px dotted;
+  gap: 0.5em;
+  font-size: 1em;
+  z-index: 2;
+  display: none;
+  color: var(--secondary);
+}
+.humberger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  z-index: -1;
+  transition: 0.25s;
+  background: var(--primary-alt);
+}
+.humberger.active {
+  color: var(--white);
+}
+.humberger.active::before {
+  height: 100%;
+}
+/* =======================================================================
+|| HERO CONTAINER
+**======================================================================== */
+.hero-container {
+  width: 100%;
+  padding: 10em 5%;
+  background: url("../assets/banner/1.jpg") no-repeat center center/cover;
+}
+.hero-container .container {
+  text-align: left;
+}
+.hero-container .content h1 {
+  font-size: 3.5em;
+  color: var(--white);
+  width: 680px;
+  line-height: 1;
+  font-weight: var(--fw-500);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.hero-container .content p {
+  font-size: 1.6em;
+  padding: 1em 0;
+  width: 700px;
+  color: var(--white-alt);
+  font-weight: var(--fw-400);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.hero-container .flexitem {
+  padding: 0.4em 0;
+  gap: 1em;
+}
+.hero-container .primary-filled-button {
+  border: 1px dotted var(--primary-alt);
+}
+.hero-container .primary-filled-button:hover {
+  border-color: var(--white);
+}
+.hero-container .primary-border-button {
+  color: var(--white);
+  border-color: var(--white);
+}
+.hero-container .primary-border-button:hover {
+  color: var(--secondary-alt);
+}
+.hero-container .primary-border-button::before {
+  background: var(--white);
+}
+/* =======================================================================
+||	MORTAGE CONTAINER
+**======================================================================== */
+.tabs-container {
+  padding: 0;
+  background: var(--white);
+}
+.tabs-container .container {
+  position: relative;
+  top: -5em;
+  background: var(--white);
+  width: 60%;
+  margin: 0 auto;
+}
+.tabs-container .box {
+  width: 100%;
+}
+.tabs-container .box:nth-child(1) {
+  border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.tabs-container .box:nth-child(1) .btn {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-bottom: 2px solid transparent;
+}
+.btn-icon {
+  font-size: 1em;
+  color: hsl(0, 4%, 50%);
+  margin-bottom: 0.5em;
+}
+
+.btn-name {
+  font-size: 1.2em;
+  color: var(--gray);
+  font-weight: var(--fw-500);
+}
+.tabs-container .box:nth-child(1) .btn.active {
+  border-color: var(--primary-alt);
+}
+.img-hidden {
+  display: none;
+}
+.mortage-img-wrap {
+  flex-basis: 40%;
+  height: 17em;
+  background: url("../assets/calbank-mortgage-home-tab.jpg") no-repeat center
+    center/cover;
+}
+.invest-save-img-wrap {
+  flex-basis: 40%;
+  height: 17em;
+  background: url("../assets/save-invest-home-tab.jpg") no-repeat center
+    center/cover;
+}
+.insurance-img-wrap {
+  flex-basis: 40%;
+  height: 17em;
+  background: url("../assets/insetscorporate-banking-account-solutions.png")
+    no-repeat center center/cover;
+}
+.corperate-img-wrap {
+  flex-basis: 40%;
+  height: 17em;
+  background: url("../assets/corporate-banking-megamenu.png") no-repeat center
+    center/cover;
+}
+.convinient-img-wrap {
+  flex-basis: 40%;
+  height: 17em;
+  background: url("../assets/convenient-banking-home-tab.jpg") no-repeat center
+    center/cover;
+}
+.tabs-container .box .wrap {
+  gap: 1em;
+  display: none;
+}
+.tabs-container .box .wrap.active {
+  display: flex;
+  animation: boxesAnim 0.5s;
+}
+.tabs-container .box:nth-child(2) {
+  padding: 2em 1em;
+  height: max-content;
+  overflow: hidden;
+}
+.tabs-container .box:nth-child(2) .content {
+  flex-basis: 59%;
+}
+.tabs-container .box:nth-child(2) .content h4 {
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  padding: 0.5em 0;
+  font-weight: var(--fw-500);
+  color: var(--secondary-alt);
+}
+.tabs-container .box:nth-child(2) .content p {
+  line-height: 1.8;
+  color: var(--gray);
+}
+.tabs-container .box:nth-child(2) .content p a {
+  color: var(--primary-alt);
+}
+.tabs-container .box:nth-child(2) .content p a:hover {
+  text-decoration: underline;
+}
+/* =======================================================================
+||	SPECIAL DEALS CONTAINER
+**======================================================================== */
+.special-deals-container {
+  background: var(--primary-alt);
+}
+.special-deals-container h1 {
+  font-size: 2.5em;
+  line-height: 1;
+  color: var(--white);
+  font-weight: var(--fw-500);
+}
+.special-deals-container p {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: var(--secondary);
+}
+.primary-border-button.b-white {
+  border-color: var(--white);
+  color: var(--white);
+}
+.primary-border-button.b-white:hover {
+  color: var(--secondary);
+}
+.primary-border-button.b-white::before {
+  background: var(--white);
+}
+.special-deals-container .wrapper {
+  display: flex;
+  gap: 2em;
+}
+.special-deals-container .box:nth-child(1) {
+  flex-basis: 60%;
+}
+.special-deals-container .box:nth-child(2) {
+  flex-basis: 30%;
+  height: 400px;
+  background: url("../assets/convenient-banking-menu.jpg") no-repeat center
+    center/cover;
+  object-fit: cover;
+}
+/* =======================================================================
+||	KIIDISAVE ACCOUNT CONTAINER
+**======================================================================== */
+.kiddysave-account-container {
+  width: 100%;
+}
+.kiddysave-account-container .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kiddysave-account-container .box:first-child {
+  flex-basis: 55%;
+}
+.kiddysave-account-container .box:last-child {
+  position: relative;
+  flex-basis: 45%;
+  padding: 3em 3em;
+  background: var(--primary);
+  border-radius: 0;
+  z-index: 2;
+  overflow: visible;
+}
+
+.kiddysave-account-container.conv {
+  background: var(--white);
+}
+.kiddysave-account-container.conv .box:first-child {
+  flex-basis: 45%;
+  padding: 3em 3em;
+  border-radius: 0;
+  background: var(--primary);
+}
+.kiddysave-account-container.conv .box:last-child {
+  flex-basis: 55%;
+  background: none;
+  padding: 0;
+}
+.kiddysave-account-container h2 {
+  font-size: 1em;
+  color: var(--gray);
+  font-weight: var(--fw-600);
+}
+.kiddysave-account-container h1 {
+  font-size: 1.2em;
+  color: var(--secondary);
+  font-weight: var(--fw-500);
+  padding: 0.8em 0;
+}
+.kiddysave-account-container p {
+  line-height: 1.9;
+  color: var(--secondary);
+}
+/* =======================================================================
+||	BANK ANYTIME CONTAINER
+**======================================================================== */
+.bank-anytime-container {
+  background: var(--white);
+}
+.bank-anytime-container .wrapper {
+  gap: 5em;
+}
+.bank-anytime-container .box:first-child {
+  flex-basis: 70%;
+}
+.bank-anytime-container h1 {
+  font-size: 2em;
+  font-weight: var(--fw-500);
+  color: var(--secondary);
+  width: 600px;
+  line-height: 1;
+}
+.bank-anytime-container p {
+  line-height: 1.9;
+  font-size: 1em;
+  color: var(--gray);
+  padding: 0.8em 0;
+}
+.bank-anytime-container .box .flexitem {
+  gap: 0.8em;
+}
+.download-img {
+  width: 150px;
+  overflow: hidden;
+}
+.bank-anytime-container .box:last-child {
+  flex-basis: 20%;
+  height: 300px;
+  padding: 4em;
+}
+.bank-anytime-container .box:last-child img {
+  margin-top: -2em;
+}
+/* =======================================================================
+||	RATES CONTAINER
+**======================================================================== */
+.rates-container {
+  width: 100%;
+  padding: 7em 10em;
+}
+.rates-container .dropdown {
+  background: var(--white);
+  width: 100%;
+  margin: 0.6em auto;
+  overflow: hidden;
+}
+.rates-container .dropdown button {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  padding: 1em 7%;
+  font-size: 1.3em;
+  color: var(--secondary);
+  background: hsl(0, 4%, 90%);
+  z-index: 5;
+}
+.rates-container .dropdown button::before {
+  position: absolute;
+  left: 2%;
+  content: "+";
+  font-size: 1.4em;
+  color: var(--secondary);
+  width: 1.5em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: hsl(0, 4%, 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-600);
+}
+.rates-container .dropdown.active button::before {
+  content: "-";
+}
+@keyframes dropdownAnim {
+  from {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+.rates-container .dropdown .content {
+  width: 100%;
+  padding: 1em 7%;
+  display: none;
+  transition: 0.5s;
+}
+.rates-container .dropdown.active .content {
+  display: block;
+  animation: dropdownAnim 0.5s;
+}
+.rates-container .dropdown .content h1 {
+  width: 100%;
+  padding: 0.8em 1.2em;
+  background: linear-gradient(
+    to right,
+    hsl(50, 97%, 51%),
+    hsl(50, 97%, 51%, 0.3)
+  );
+  font-size: 1.6em;
+  font-weight: var(--fw-500);
+}
+.rates-container .dropdown table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  margin-top: 1em;
+}
+.rates-container .dropdown table tr th {
+  padding: 1.5em 1.8em;
+  background: hsl(0, 4%, 92%);
+  color: var(--secondary);
+  font-weight: var(--fw-500);
+  font-size: 1em;
+}
+.rates-container .dropdown table tr td {
+  padding: 1.5em 1.8em;
+}
+.rates-container .dropdown .grid-2fr {
+  margin: 1.5em 0;
+  gap: 2em;
+}
+.rates-container .dropdown small {
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+.rates-container .dropdown small a {
+  color: var(--primary-alt);
+}
+.rates-container .dropdown .grid-2fr .box {
+  padding: 2em 2em;
+}
+.rates-container .dropdown .grid-2fr .box:first-child {
+  background: hsl(0, 4%, 90%, 0.3);
+}
+.rates-container .dropdown .grid-2fr .box:last-child {
+  background: hsla(52, 91%, 65%, 0.3);
+}
+.rates-container .dropdown .grid-2fr .box p {
+  line-height: 2;
+  font-size: 1.4em;
+  color: var(--secondary);
+}
+.rates-container .dropdown .grid-2fr .box ul li {
+  list-style: square;
+  padding: 0.5em 0;
+}
+.rates-container .dropdown .grid-2fr .box ul li a {
+  color: var(--secondary);
+}
+.rates-container .dropdown .grid-2fr .box ul li a:hover {
+  color: var(--primary-alt);
+}
+/* =======================================================================
+||	NEWS AND STORIES
+**======================================================================== */
+.news-and-stories-container {
+  background: var(--white);
+}
+.news-and-stories-container h3 {
+  font-size: 2.5em;
+  color: var(--secondary);
+  padding-bottom: 1em;
+  font-weight: var(--fw-500);
+}
+.news-and-stories-container .wrapper {
+  gap: 1em;
+}
+.news-and-stories-container .box:nth-child(1) {
+  position: relative;
+  flex-basis: 55%;
+  background: var(--background),
+    url("../assets/CalBank-night-pic-scaled.jpg") no-repeat center center/cover;
+}
+.news-and-stories-container .box:nth-child(1) .content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em 2%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.3em;
+}
+.news-and-stories-container .box:nth-child(1) .content small {
+  color: var(--white-alt);
+  font-weight: var(--fw-600);
+}
+.news-and-stories-container .box:nth-child(1) .content a {
+  color: var(--primary);
+  font-weight: var(--fw-600);
+}
+.news-and-stories-container .box a:hover {
+  text-decoration: underline;
+}
+.news-and-stories-container .box:nth-child(1) .content p {
+  color: var(--white);
+}
+.news-and-stories-container .box:nth-child(2) {
+  flex-basis: 44%;
+  gap: 1em;
+}
+.news-and-stories-container .box:nth-child(2) .img {
+  position: relative;
+}
+.news-and-stories-container .box:nth-child(2) .img::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+}
+.news-and-stories-container .box:nth-child(2) .img img {
+  width: 280px;
+  height: auto;
+  overflow: hidden;
+}
+.news-and-stories-container .box:nth-child(2) .content {
+  margin: 0 0.8em;
+}
+.news-and-stories-container .box:nth-child(2) .content {
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.3em;
+}
+.news-and-stories-container .box:nth-child(2) .content a {
+  color: var(--primary);
+}
+/* =======================================================================
+||	BE THE FIRST TO KNOW
+**======================================================================== */
+.be-the-first-to-know {
+  background: linear-gradient(to right, hsl(37, 93%, 60%), hsl(37, 100%, 70%));
+}
+.be-the-first-to-know h3 {
+  font-size: 2.4em;
+  font-weight: var(--fw-600);
+  color: var(--secondary);
+}
+.be-the-first-to-know p {
+  font-size: 1em;
+  color: var(--secondary);
+}
+.be-the-first-to-know .form-container {
+  margin: 1em 0;
+  width: 60%;
+}
+.be-the-first-to-know form,
+.be-the-first-to-know form .input-box,
+.be-the-first-to-know form .input-box input {
+  width: 100%;
+}
+.be-the-first-to-know form .input-box input {
+  padding: 1em 2%;
+  font-size: 1em;
+  color: var(--secondary);
+  margin: 0.3em 0;
+}
+.be-the-first-to-know .primary-filled-button {
+  width: 60%;
+  text-transform: uppercase;
+  font-weight: var(--fw-600);
+}
+/* =======================================================================
+||	BRANCHES AND ATMS
+**======================================================================== */
+.hero-container.branches {
+  background: var(--background),
+    url("../assets/homepage-convenient-banking-overlap.jpg") no-repeat center
+      center/cover;
+}
+.hero-container.branches h1 {
+  font-size: 3em;
+  color: var(--white);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.branches.breadcrumps {
+  padding: 2em 5%;
+  background: var(--white);
+}
+.branches.breadcrumps .wrapper {
+  gap: 0.3em;
+  align-items: center;
+}
+.branches.breadcrumps .wrapper p {
+  font-size: 1em;
+  color: var(--secondary);
+}
+.branches.breadcrumps .wrapper p a:hover {
+  color: var(--primary);
+}
+.branches.breadcrumps .wrapper p small {
+  font-size: 1.1em;
+}
+/* =======================================================================
+||	BRANCHES TABS
+**======================================================================== */
+.branches-tab-container {
+  padding: 0 5%;
+  padding-bottom: 7em;
+  background: var(--white);
+}
+.branch-atm-btn {
+  position: relative;
+  width: 100%;
+  font-size: 1.3em;
+  padding: 1em 0;
+  background: var(--white-alt);
+  z-index: 2;
+}
+.branch-atm-btn::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transition: 0.5s;
+  background: var(--primary);
+  z-index: -1;
+}
+.branch-atm-btn:hover::before {
+  width: 100%;
+}
+.branch-atm-btn::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: -10px;
+  width: 20px;
+  aspect-ratio: 1/1;
+  background: var(--secondary);
+  z-index: -2;
+  display: none;
+  transform: rotate(-45deg);
+}
+.branch-atm-btn.active {
+  background: var(--secondary);
+  color: var(--white);
+}
+.branch-atm-btn.active::before {
+  background: var(--secondary);
+}
+.branch-atm-btn.active::after {
+  display: block;
+}
+.branches-tab-container .wrapper:nth-child(2) {
+  overflow: hidden;
+  height: max-content;
+}
+.branches-tab-container .box {
+  width: 100%;
+}
+.branches-tab-container .branch-dropdown {
+  padding: 0 4%;
+  border-bottom: 1px solid hsla(240, 15%, 35%, 0.34);
+}
+.branches-tab-container .branch-dropdown,
+.branches-tab-container .branch-dropdown button {
+  width: 100%;
+}
+.branches-tab-container .branch-dropdown button {
+  position: relative;
+  align-items: center;
+  padding: 0.5em 0.8em;
+  text-align: left;
+  font-size: 1.5em;
+  color: #555;
+  font-weight: var(--fw-600);
+}
+.branch-dropdown button::before {
+  position: absolute;
+  content: "+";
+  right: 1.5em;
+  width: 1.5em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-size: 1em;
+  font-weight: var(--fw-500);
+  background: hsl(0, 4%, 50%, 0.2);
+}
+.branches-tab-container .branch-dropdown.active button::before {
+  content: "-";
+}
+.branches-tab-container .branch-dropdown .main-content {
+  padding: 1em;
+  display: none;
+}
+.branches-tab-container .branch-dropdown.active .main-content {
+  display: block;
+  animation: dropdownAnim 0.8s;
+}
+.branches-tab-container .box .content {
+  padding: 1em 0;
+  border-bottom: 1px solid hsl(0, 0%, 10%, 0.2);
+}
+.branches-tab-container .content h3 {
+  padding: 1em 0.8em;
+  background: hsl(0, 4%, 90%);
+  color: var(--secondary);
+  font-weight: var(--fw-500);
+}
+.branches-tab-container .content ul li {
+  width: 100%;
+  padding: 0.3em 1em;
+  font-size: 1.2em;
+  color: var(--secondary);
+}
+.branches-tab-container .content ul li:first-child {
+  font-size: 1.5em;
+  font-weight: var(--fw-500);
+  color: var(--gray);
+  padding: 0.4em 0.8em;
+  margin-top: 1em;
+}
+.branches-tab-container .content ul li a {
+  color: var(--primary);
+}
+.branches-tab-container .box:nth-child(2) ul {
+  padding: 0.8em;
+  border-bottom: none;
+}
+.branches-tab-container .wrapper .box {
+  display: none;
+}
+@keyframes tabAnim {
+  from {
+    transform: translateY(-5em);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.branches-tab-container .box.show {
+  display: block;
+  animation: tabAnim 0.8s;
+}
+.branches-tab-container .box:nth-child(2) ul li:first-child,
+.branches-tab-container .box:nth-child(2) ul li {
+  font-size: 1.2em;
+  padding: 1em 0;
+  color: var(--gray);
+  font-weight: var(--fw-500);
+  border-bottom: 1px solid #eee;
+}
+.branches-links a {
+  position: relative;
+  padding: 3em 0;
+  width: 100%;
+  gap: 0.2em;
+  z-index: 2;
+}
+.branches-links a span {
+  width: 3em;
+  aspect-ratio: 1/1;
+  border: 1px solid;
+  display: flex;
+  font-size: 1em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--primary-alt);
+}
+.branches-links a p {
+  font-size: 1.3em;
+  color: var(--secondary-alt);
+  font-weight: var(--fw-600);
+}
+.branches-links a::before {
+  position: absolute;
+  content: "";
+  left: "";
+  width: 100%;
+  height: 0;
+  background-image: linear-gradient(
+    90deg,
+    hsl(37, 100%, 70%),
+    hsl(267, 43%, 14%),
+    hsla(304, 64%, 4%)
+  );
+  z-index: -1;
+  transition: 0.5s;
+}
+.branches-links a:nth-child(1)::before,
+.branches-links a:nth-child(3)::before {
+  top: 0;
+}
+.branches-links a:nth-child(2)::before,
+.branches-links a:nth-child(4)::before {
+  bottom: 0;
+}
+.branches-links a:hover::before {
+  height: 100%;
+}
+.branches-links a:hover span {
+  color: var(--white);
+}
+.branches-links a:hover p {
+  color: var(--primary-alt);
+}
+/* =======================================================================
+||	TOOLS AND CALCULATORS
+**======================================================================== */
+.tools-and-calculators {
+  padding: 0 5%;
+  padding-bottom: 7em;
+  background: var(--white);
+}
+.tools-cal-btn {
+  position: relative;
+  width: 100%;
+  font-size: 1.3em;
+  padding: 0.9em 0;
+  background: var(--white-alt);
+  z-index: 2;
+}
+.tools-cal-btn::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transition: 0.5s;
+  background: var(--primary);
+  z-index: -1;
+}
+.tools-cal-btn:hover::before {
+  width: 100%;
+}
+.tools-cal-btn::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: -10px;
+  width: 20px;
+  aspect-ratio: 1/1;
+  background: var(--secondary);
+  z-index: -2;
+  display: none;
+  transform: rotate(-45deg);
+}
+.tools-cal-btn.active {
+  background: var(--secondary);
+  color: var(--white);
+}
+.tools-cal-btn.active::before {
+  background: var(--secondary);
+}
+.tools-cal-btn.active::after {
+  display: block;
+}
+.tools-and-calculators .wrapper:nth-child(2) {
+  overflow: hidden;
+  height: max-content;
+}
+.tools-and-calculators .content {
+  padding: 3em;
+}
+.tools-and-calculators .content h1 {
+  color: var(--secondary);
+  font-size: 2.4em;
+  padding: 0.3em 0;
+  font-weight: var(--fw-500);
+}
+.tools-and-calculators .content .p-tag {
+  padding: 0.4em 0;
+  border-bottom: 1px solid hsl(0, 4%, 50%, 0.2);
+}
+.tools-and-calculators .content p {
+  font-size: 1.3em;
+  width: 620px;
+  max-width: 100%;
+  padding-bottom: 0.5em;
+  line-height: 1.9;
+}
+.tools-and-calculators .wrapper .flexitem {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 3em;
+}
+.tools-and-calculators .wrapper .flexitem .left {
+  flex-basis: 35%;
+  padding: 0 3em;
+}
+.tools-and-calculators .wrapper .flexitem .border-wrap {
+  width: 100%;
+  padding: 2em;
+  text-align: center;
+  border: 3px solid var(--primary);
+}
+.tools-and-calculators .wrapper .flexitem .border-wrap p {
+  font-size: 1.6em;
+}
+.tools-and-calculators .wrapper .flexitem .border-wrap .rate {
+  width: 100%;
+  padding-top: 0.4em;
+  padding-bottom: 1em;
+  font-size: 1.4em;
+  font-weight: var(--fw-800);
+  border-bottom: 1px solid hsl(0, 4%, 50%, 0.4);
+  margin-bottom: 0.8em;
+}
+.tools-and-calculators .wrapper .flexitem .border-wrap .days {
+  font-size: 1.4em;
+  padding-top: 0.4em;
+  font-weight: var(--fw-800);
+}
+.tools-and-calculators .wrapper .flexitem .right {
+  flex-basis: 63%;
+}
+.tools-and-calculators .wrapper .form-container,
+.tools-and-calculators .wrapper .form-container form,
+.tools-and-calculators .wrapper .form-container .input-box,
+.tools-and-calculators .wrapper .form-container input {
+  width: 100%;
+}
+.tools-and-calculators .wrapper .form-container span {
+  display: block;
+  padding: 0.4em 0;
+  font-size: 1.2em;
+  color: var(--secondary);
+}
+.tools-and-calculators .wrapper .form-container input {
+  padding: 1.2em 1.2rem;
+  background: linear-gradient(
+    260deg,
+    hsl(0, 4%, 90%, 0.3),
+    hsl(0, 4%, 90%, 0.5)
+  );
+  font-size: 1em;
+  transition: 0.25s;
+  color: var(--secondary);
+  border-bottom: 2px solid hsl(0, 4%, 90%, 0.8);
+}
+.tools-and-calculators .wrapper .form-container input:focus {
+  border-color: var(--primary-alt);
+}
+.tools-and-calculators .primary-filled-button:hover {
+  color: var(--secondary);
+}
+.tools-and-calculators .wrapper .box {
+  display: none;
+}
+.tools-and-calculators .wrapper .box.show {
+  display: block;
+  animation: tabAnim 0.8s;
+}
+/* =======================================================================
+|| ABOUT CALBANK
+**======================================================================== */
+.hero-container.about-calbank {
+  background: var(--background),
+    url("../assets/abt-test.jpg") no-repeat center center/cover;
+}
+.hero-container.about-calbank .content {
+  width: 80%;
+}
+.hero-container.about-calbank .content .breadcrumps,
+.hero-container.about-calbank .content span.flexitem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1em;
+  color: var(--primary);
+  font-weight: var(--fw-600);
+}
+.hero-container.about-calbank .content p {
+  width: 100%;
+}
+.special-deals-container.who-we-are {
+  background: var(--white);
+}
+.special-deals-container.who-we-are h1 {
+  color: var(--secondary);
+}
+.special-deals-container.who-we-are p {
+  line-height: 1.9;
+}
+.kiddysave-account-container.leadership .box:nth-child(1),
+.kiddysave-account-container.corperate-governance .box:nth-child(2) {
+  position: relative;
+  overflow: visible;
+  z-index: 2;
+  background: none;
+  border: 3px solid var(--primary-alt);
+}
+.kiddysave-account-container.leadership .box:nth-child(1)::before,
+.kiddysave-account-container.corperate-governance .box:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: -1em;
+  left: -1em;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: var(--primary-alt);
+  border: 2px solid var(--primary-alt);
+}
+/* =======================================================================
+||	INVESTOR RELATIONS
+**======================================================================== */
+.hero-container.investor {
+  background: url("../assets/banner/partnership.jpg");
+}
+.hero-container.investor .content p {
+  width: 80%;
+}
+.tabs-container.investor ul {
+  padding-left: 1em;
+}
+.tabs-container.investor ul li {
+  list-style-type: square;
+  padding: 0.3em 0;
+}
+.tabs-container.investor ul li a:hover {
+  color: var(--primary);
+}
+/* =======================================================================
+||	FOOTER
+**======================================================================== */
+.grid-5fr {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+footer {
+  width: 100%;
+  background: hsl(240, 9%, 7%);
+}
+footer .container {
+  padding: 2em 5%;
+}
+footer h3 {
+  padding: 0.5em 0;
+  font-size: 1.2em;
+  color: var(--white);
+  font-weight: var(--fw-600);
+}
+footer ul li {
+  padding: 0.3em 0;
+}
+footer ul li.flexitem {
+  gap: 0.3em;
+}
+footer ul li.flexitem a,
+footer ul li a {
+  transition: 0.2s;
+}
+footer ul li a:hover {
+  color: var(--white-alt);
+}
+footer ul li.flexitem a {
+  color: var(--primary);
+}
+footer ul li.flexitem a:hover {
+  text-decoration: underline;
+}
+footer .media-handles {
+  margin: 0.8em 0;
+  width: 100%;
+  gap: 0.5em;
+}
+footer .media-handles a {
+  width: 3em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right,
+    hsla(240, 15%, 35%, 0.4),
+    hsla(49, 82%, 43%, 0.45)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  color: var(--white);
+  transition: 0.5s;
+}
+footer .media-handles a:hover {
+  background: linear-gradient(
+    to left,
+    hsla(240, 15%, 35%, 0.34),
+    hsla(49, 82%, 43%, 0.4)
+  );
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+footer .last {
+  padding: 2em 5%;
+  background: hsl(0, 0%, 10%);
+}
+footer .last p {
+  color: var(--white-alt);
+}
+footer .last p a {
+  color: var(--white);
+}
+/* =======================================================================
+||	MEDIA QUERIES
+**======================================================================== */
+@media screen and (max-width: 1355px) {
+  .main-site {
+    overflow-x: hidden;
+  }
+  .mega-dropdown.about-us {
+    left: -65.5em;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .mega-dropdown.all-products {
+    left: -20.3em;
+  }
+  .mega-dropdown.about-us {
+    left: -60.3em;
+  }
+}
+@media screen and (max-width: 1290px) {
+  .mega-dropdown.all-products {
+    left: -18.3em;
+  }
+  .mega-dropdown.about-us {
+    left: -52.3em;
+  }
+}
+@media screen and (max-width: 1260px) {
+  .mega-dropdown.all-products {
+    left: -17em;
+  }
+  .mega-dropdown.about-us {
+    left: -50.3em;
+  }
+}
+@media screen and (max-width: 1245px) {
+  .navbar {
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    width: 100%;
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 1px solid #eee;
+    background: var(--white);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    transition: 0.5s;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .nav-item {
+    padding: 1.2em 5em;
+    width: 100%;
+  }
+  .nav-item.active,
+  .nav-item:hover {
+    background: hsl(0, 0%, 99%);
+  }
+  .nav-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .humberger {
+    display: inline-block;
+    margin: 0 1em;
+  }
+  .mega-dropdown {
+    position: relative;
+    top: 1em;
+    width: 100vw;
+    margin-left: auto;
+  }
+  .header-container.scrollFix .mega-dropdown.all-products,
+  .header-container.scrollFix .mega-dropdown.about-us {
+    left: -2.2em;
+  }
+  .mega-dropdown.all-products,
+  .mega-dropdown.about-us {
+    left: -5em;
+    top: 1em;
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 990px) {
+  .topbar-container {
+    display: none;
+  }
+  .topbar.small-screen {
+    display: block;
+    padding: 1em 2%;
+  }
+  .topbar.small-screen .content {
+    font-size: 0.8em;
+  }
+  .mega-dropdown.all-products .wrapper > .left {
+    flex-basis: fill;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .mega-dropdown.all-products .wrapper .right .wrap-content {
+    gap: 0;
+    width: 100%;
+    display: flex;
+  }
+  header .right li a {
+    font-size: 0.85em;
+  }
+  header .mega-dropdown .primary-border-button {
+    font-size: 1em;
+    width: max-content;
+  }
+  .mega-dropdown.all-products .wrapper .right .grid-2fr {
+    display: flex;
+  }
+  .heading {
+    font-size: 1em;
+  }
+  .mega-dropdown.all-products .wrapper .right .wrap-content .content {
+    width: 100%;
+  }
+  .business-banking-img,
+  .personal-banking-img,
+  .overview-img-wrapper,
+  .account-sol-img-wrapper,
+  .convinient-img-wrapper {
+    display: none;
+  }
+  .mega-dropdown.all-products,
+  .mega-dropdown.about-us {
+    padding: 3em 1em;
+  }
+  .corperate-banking-buttons-wrapper {
+    flex-basis: 38%;
+  }
+  .corperate-btn {
+    font-size: 0.8em;
+  }
+  .mega-dropdown.all-products
+    .wrapper
+    .right
+    .box.corperate-banking
+    .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .mega-dropdown.all-products
+    .wrapper
+    .right
+    .box.corperate-banking
+    .container
+    .grid-2fr {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .mega-dropdown.all-products .wrapper .right .box.corperate-banking .box.show {
+    display: block;
+    animation: boxesAnim 0.5s;
+  }
+  .mega-dropdown.about-us .grid-3fr {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .hero-container .content h1 {
+    font-size: 2.8em;
+    width: 100%;
+    font-weight: var(--fw-600);
+  }
+  .hero-container.about-calbank .content .breadcrumps,
+  .hero-container.about-calbank .content span.flexitem {
+    display: flex;
+  }
+  .hero-container .content,
+  .hero-container.about-calbank .content {
+    width: 100%;
+  }
+  .hero-container .content p {
+    width: 100%;
+    font-size: 1.4em;
+    width: 100%;
+  }
+  .tabs-container .container {
+    width: 90%;
+  }
+  .special-deals-container .box:nth-child(1) {
+    flex-basis: 55%;
+  }
+  .special-deals-container .box:nth-child(2) {
+    flex-basis: 43%;
+  }
+  .rates-container .dropdown button {
+    padding: 1em 3em;
+  }
+  .rates-container {
+    padding: 7em 5%;
+  }
+  .bank-anytime-container .box:last-child {
+    display: none;
+  }
+  .news-and-stories-container .img-hidden {
+    display: block;
+    height: 400px;
+  }
+  .news-and-stories-container .wrapper {
+    flex-direction: column;
+  }
+  .grid-5fr {
+    gap: 0.8em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 760px) {
+  .nav-item {
+    padding: 1.2em 2em;
+    width: 100%;
+  }
+  .mega-dropdown.all-products,
+  .mega-dropdown.about-us {
+    left: -2em;
+  }
+  header .online-banking-button-container {
+    display: none;
+  }
+  .all-products-btn {
+    font-size: 0.8em;
+  }
+  .topbar.small-screen .content:last-child {
+    display: none;
+  }
+  .tabs-container .container {
+    width: 95%;
+    top: -0.1px;
+  }
+  .special-deals-container .wrapper {
+    flex-direction: column;
+  }
+  .special-deals-container .box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .kiddysave-account-container .wrapper {
+    flex-direction: column;
+  }
+  .kiddysave-account-container.conv .wrapper {
+    flex-direction: column-reverse;
+  }
+  .bank-anytime-container .wrapper {
+    flex-direction: column;
+  }
+  .bank-anytime-container h1,
+  .bank-anytime-container p {
+    width: 100%;
+  }
+  .rates-container .dropdown .content h1 {
+    font-size: 1.3em;
+  }
+  .rates-container .dropdown .grid-2fr {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .be-the-first-to-know .form-container {
+    width: 100%;
+  }
+  .branches.breadcrumps .wrapper p {
+    font-size: 0.7em;
+  }
+  .branches-tab-container {
+    padding: 0 2%;
+    padding-bottom: 7em;
+  }
+  .branches-tab-container .branch-dropdown button {
+    padding: 0.5em;
+    font-size: 1.2em;
+  }
+  .branches-tab-container .branch-dropdown button::before {
+    right: 0.5em;
+  }
+  .branches-tab-container .branch-dropdown,
+  .branches-tab-container .branch-dropdown .main-content {
+    padding: 0;
+  }
+  .branches-tab-container .box:nth-child(2) ul {
+    padding: 0;
+  }
+  .branches-tab-container .box .content ul li:first-child {
+    font-size: 1.4em;
+    color: var(--secondary-alt);
+  }
+  .branches-tab-container .box .content ul li {
+    padding: 0.4em;
+  }
+  .branches-links .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .branches-links a p {
+    font-size: 1.2em;
+  }
+  .tools-and-calculators .wrapper .flexitem {
+    flex-direction: column;
+    gap: 2em;
+  }
+  .tools-and-calculators .wrapper .flexitem .left,
+  .tools-and-calculators .wrapper .flexitem .right {
+    width: 100%;
+  }
+  .tools-and-calculators .wrapper .flexitem .right {
+    padding-bottom: 5em;
+  }
+  .tools-and-calculators .wrapper .flexitem {
+    padding: 0 1.2em;
+  }
+}
+@media screen and (max-width: 625px) {
+  .mega-dropdown.all-products .wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mega-dropdown.all-products .wrapper .right .wrap-content {
+    flex-direction: column;
+  }
+  .tabs-container .box:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+  }
+  .tabs-container .box:nth-child(1) .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .news-and-stories-container .box:nth-child(2) .flexitem {
+    flex-direction: column;
+  }
+  .news-and-stories-container .box:nth-child(2) .img img {
+    width: 100%;
+  }
+  .grid-5fr {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .tools-and-calculators {
+    padding: 0 2%;
+  }
+  .tools-and-calculators .content h1 {
+    font-size: 1.6em;
+  }
+  .tools-and-calculators .content {
+    padding: 1.5em;
+  }
+  .tools-and-calculators .content p {
+    font-size: 1em;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 495px) {
+  .topbar.small-screen .content {
+    font-size: 0.65em;
+  }
+  .tabs-container .box .wrap {
+    flex-direction: column;
+  }
+  .img-hidden {
+    display: block;
+  }
+  .rates-container .dropdown button {
+    font-size: 1.2em;
+    text-align: left;
+  }
+  .rates-container .dropdown .content {
+    padding: 1em 3%;
+  }
+  .rates-container .dropdown .content h1 {
+    padding: 0.8em;
+    font-size: 1.2em;
+  }
+  .rates-container .dropdown table tr th {
+    padding: 1.2em;
+    font-size: 0.85em;
+  }
+  .tools-and-calculators .wrapper .flexitem {
+    padding: 0 1.2em;
+  }
+  .tools-and-calculators .wrapper .flexitem .left {
+    padding: 0;
+  }
+  .tools-and-calculators .wrapper .flexitem .border-wrap {
+    padding: 1em;
+  }
+}
+@media screen and (max-width: 395px) {
+  .logo {
+    width: 150px;
+  }
+  .hero-container.investor .content p{
+    width: 100%;
+  }
+  .humberger small {
+    display: none;
+  }
+  .hero-container .flexitem {
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+  }
+  .hero-container.about-calbank .content .breadcrumps,
+  .hero-container.about-calbank .content span.flexitem {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+  }
+  .header-container .primary-filled-button {
+    width: 100%;
+  }
+  .hero-container .primary-border-button {
+    width: 100%;
+    text-align: center !important;
+  }
+  .kiddysave-account-container.leadership .box:nth-child(1),
+  .kiddysave-account-container.corperate-governance .box:nth-child(2) {
+    background: var(--primary-alt);
+  }
+  .kiddysave-account-container.leadership .box:nth-child(1)::before,
+  .kiddysave-account-container.corperate-governance .box:nth-child(2)::before {
+    display: none;
+  }
+  .branches-links a p {
+    font-size: 1em;
+  }
+}
